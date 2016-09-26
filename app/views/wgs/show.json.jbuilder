@@ -1,0 +1,1 @@
+json.partial! "wgs/wg", wg: @wg

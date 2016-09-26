@@ -1,0 +1,1 @@
+json.array! @wgs, partial: 'wgs/wg', as: :wg

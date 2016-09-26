@@ -1,0 +1,49 @@
+<div class="panel effect2">
+	<section>
+		<h2>Hey, <%= current_user.username %>!</h2>
+		<p>
+			<%= link_to "Edit your profile", edit_user_registration_path %>
+		</p>
+		<p>
+			<% if current_user.wg_id %>
+				<h2>My WG!</h2>
+				<strong>Name</strong><br />
+				<h4><%= current_user.wg.name %></h4>
+				<strong>Members</strong><br />
+				<% @users.each do |u| %>
+					<% if u.wg_id == current_user.wg_id %>
+						<small><%= u.username %></small>	<br />						
+					<% end %>
+				<% end %>	
+				<strong>Tasklist</strong><br />
+				<%= render "tasks/new" %>
+				<ol class="list-group tasklist">			
+					<% @tasks.each do |t| %>
+						<li class="list-group-item clearfix">
+						<strong class="pull-right">
+							<%= link_to 'Delete', task_path(t.id), method: :delete, class: "btn btn-primary" %> <br />
+						</strong>
+						<h3><%= t.name %></h3>
+						<strong><%= t.user.username %></strong>
+						</li>
+					<% end %>
+				</ol>
+				<strong>Shoppinglist</strong><br />
+				<%= render "items/new" %>
+				<ol class="list-group tasklist">			
+					<% @items.each do |i| %>
+						<li class="list-group-item clearfix">
+						<strong class="pull-right">
+							<%= link_to 'Delete', item_path(i.id), method: :delete, class: "btn btn-primary" %> <br />
+						</strong>
+						<h3><%= i.name %></h3>
+						<strong><%= i.amount %></strong>
+						</li>
+					<% end %>
+				</ol>
+				<%= link_to 'Leave WG', leave_wg_path, method: :get, class: "btn btn-primary wgrelbtn" %> 
+			<% end %>
+		</p>
+		<%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+	</section>
+</div>

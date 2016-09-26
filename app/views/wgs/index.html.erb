@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Wgs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wgs.each do |wg| %>
+      <tr>
+        <td><%= wg.name %></td>
+        <td><%= link_to 'Show', wg %></td>
+        <td><%= link_to 'Edit', edit_wg_path(wg) %></td>
+        <td><%= link_to 'Destroy', wg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Wg', new_wg_path %>

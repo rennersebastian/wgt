@@ -1,0 +1,38 @@
+<% if !user_signed_in? %>	  
+	<%= render "users/sessions/new" %>
+<% else %>
+	<div class="panel effect2">
+		<section>
+			<% if current_user.wg_id %>
+				<h1 class="hl text-center">My WG!</h1>
+				<h3><%= current_user.wg.name %></h3>
+				<strong>Members</strong><br />
+				<% @users.each do |u| %>
+					<% if u.wg_id == current_user.wg_id %>
+						<small><%= u.username %></small>	<br />						
+					<% end %>
+				<% end %>				
+			<% else %>
+				<h1 class="hl text-center">WGs!</h1>
+				<ol class="list-group">
+					<% @wgss.each do |wg| %>
+						<li class="list-group-item clearfix">
+						<h4 class="pull-right">
+							<%= link_to 'WG details', wg %>
+						</h4>
+						<h3><%= wg.name  %></h3>
+						<%= link_to 'Join', add_wg_path(wg.id), method: :post, class: "btn btn-primary wgrelbtn" %> <br />
+						<strong>Members</strong><br />
+						<% @users.each do |u| %>
+							<% if u.wg_id == wg.id %>
+								<small><%= u.username %></small>	<br />						
+							<% end %>
+						<% end %>
+						</li>
+					<% end %>
+				</ol>
+				<%= link_to('New WG', new_wg_path)  %>			
+			<% end %>
+		</section>
+	</div>
+<% end %>
